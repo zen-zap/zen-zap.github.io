@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<div class="container">
+  <h1>{{ page.title }}</h1>
+  
+  <div class="project-meta">
+    {% if page.stack %}
+      <p><strong>Stack:</strong> {{ page.stack }}</p>
+    {% endif %}
+    {% if page.github %}
+      <p><strong>GitHub:</strong> <a href="{{ page.github }}" target="_blank">{{ page.github }}</a></p>
+    {% endif %}
+    {% if page.demo %}
+      <p><strong>Demo:</strong> <a href="{{ page.demo }}" target="_blank">{{ page.demo }}</a></p>
+    {% endif %}
+  </div>
+  
+  <div class="project-content">
+    {{ content }}
+  </div>
+</div>

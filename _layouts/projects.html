@@ -1,0 +1,89 @@
+---
+layout: default
+---
+
+<div class="container">
+  <header class="page-header">
+    <h1 class="page-title">{{ page.title }}</h1>
+  </header>
+
+  <section class="projects-list">
+    {% for project in site.projects %}
+      <article class="project-card">
+        <h2 class="project-card-title">
+          <a href="{{ project.url }}">{{ project.title }}</a>
+        </h2>
+
+        {% if project.description %}
+        <p class="project-card-desc">{{ project.description }}</p>
+        {% endif %}
+
+        {% if project.github %}
+        <a class="project-card-github" href="{{ project.github }}" target="_blank" rel="noopener" aria-label="View on GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </section>
+</div>
+
+<style>
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+.page-header {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.page-title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.project-card-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+.project-card-title a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+.project-card-desc {
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+.project-card-stack {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.project-card-github {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1.25rem;
+  color: var(--link-color);
+  transition: color 0.2s ease;
+}
+.project-card-github:hover {
+  color: var(--link-hover-color);
+}
+</style>
