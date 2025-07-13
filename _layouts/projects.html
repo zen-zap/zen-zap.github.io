@@ -9,81 +9,91 @@ layout: default
 
   <section class="projects-list">
     {% for project in site.projects %}
-      <article class="project-card">
-        <h2 class="project-card-title">
-          <a href="{{ project.url }}">{{ project.title }}</a>
-        </h2>
-
-        {% if project.description %}
-        <p class="project-card-desc">{{ project.description }}</p>
-        {% endif %}
-
-        {% if project.github %}
-        <a class="project-card-github" href="{{ project.github }}" target="_blank" rel="noopener" aria-label="View on GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-        {% endif %}
+      <article class="card-wrapper card project-card">
+        <div class="card-body d-flex flex-column" style="height: 100%;">
+          <h1 class="card-title my-2 mt-md-0">{{ project.title }}</h1>
+          {% if project.description %}
+            <div class="card-text content mt-0 mb-3">
+              <p>{{ project.description }}</p>
+            </div>
+          {% endif %}
+          {% if project.github %}
+            <a class="project-card-github ms-auto" href="{{ project.github }}" target="_blank" rel="noopener" aria-label="View on GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+          {% endif %}
+        </div>
       </article>
     {% endfor %}
   </section>
 </div>
 
 <style>
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem;
-}
-.page-header {
-  text-align: left;
-  margin-bottom: 1.5rem;
-}
-.page-title {
-  font-size: 2rem;
-  margin: 0;
-}
-
+/* Increase gap between heading and cards */
 .projects-list {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-top: 2.5rem; /* <-- EDIT THIS FOR MORE SPACE BELOW "Projects" */
 }
 
-.project-card {
+.card-wrapper.card.project-card {
   background: var(--card-bg);
-  border: 1px solid var(--border-color);
+  border: none /* 0.2px solid #d3d3d3; /* <-- EDIT THIS FOR THIN GREY BORDER */
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
-  box-shadow: var(--shadow);
+  box-shadow: 0 2px 8px 0 rgba(27, 27, 27, 0.07), 0 1px 2px 0 rgba(27, 27, 27, 0.1); /* nice subtle shadow */
   position: relative;
   overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  color: var(--text-color);
+  min-height: 180px;
 }
-.project-card-title {
-  margin: 0 0 0.5rem;
+
+/* Dark mode: same thin border, but a bit darker grey */
+html[data-mode="dark"] .card-wrapper.card.project-card {
+  border: none /* 0.2px solid #3b3d41ff; /* <-- EDIT THIS FOR DARK MODE THIN BORDER */
+}
+
+.card-wrapper.card.project-card:hover {
+  animation: giggle 0.9s cubic-bezier(.36,.07,.19,.97);
+}
+
+@keyframes giggle {
+  0%   { transform: translateY(0); }
+  20%  { transform: translateY(-2px); }
+  40%  { transform: translateY(2px); }
+  60%  { transform: translateY(-1px); }
+  40%  { transform: translateY(1px); }
+  60% { transform: translateY(0); }
+}
+
+/* Project name color (edit here) */
+.card-title {
   font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+  color: #3490dc; /* <-- EDIT THIS COLOR FOR PROJECT NAME */
 }
-.project-card-title a {
-  color: var(--link-color);
-  text-decoration: none;
-}
-.project-card-desc {
+
+/* Project description transparency (edit here) */
+.card-text {
   margin: 0 0 0.75rem;
   line-height: 1.5;
+  color: var(--text-color);
+  opacity: 0.82; /* <-- EDIT THIS FOR DESCRIPTION TRANSPARENCY */
 }
-.project-card-stack {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
+
+/* GitHub icon bottom right */
 .project-card-github {
+  font-size: 1.5rem;
+  color: var(--link-color, #58a6ff);
   position: absolute;
   bottom: 1rem;
-  right: 1rem;
-  font-size: 1.25rem;
-  color: var(--link-color);
+  right: 1.25rem;
   transition: color 0.2s ease;
+  padding: 0.25rem;
 }
 .project-card-github:hover {
-  color: var(--link-hover-color);
+  color: var(--link-hover-color, #1f6feb);
 }
 </style>
