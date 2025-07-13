@@ -1,25 +1,51 @@
 ---
-layout: resume
+layout: page
 icon: "fa-solid fa-file"
 order: 3
 title: Resume
 permalink: /resume/
 ---
 
-<div class="pdf-viewer">
-  <canvas id="pdf-canvas"></canvas>
-</div>
-<div class="pdf-controls mt-3">
-  <button id="prev-page" class="btn btn-outline-secondary" style="display:none;">
-    <i class="fas fa-chevron-left"></i> Previous
-  </button>
-  <span id="page-info" class="mx-3">Page 1 of 1</span>
-  <button id="next-page" class="btn btn-outline-secondary" style="display:none;">
-    Next <i class="fas fa-chevron-right"></i>
-  </button>
-  <a href="{{ '/assets/files/resume.pdf' | relative_url }}"
-     download="Ashutosh_Panda_Resume.pdf"
-     class="btn btn-download ms-3">
+![Resume]({{ 'resume.png' | relative_url }}){: .resume-image }
+
+<div class="resume-actions">
+  <a href="{{ '/assets/files/resume.pdf' | relative_url }}" 
+     download="Ashutosh_Panda_Resume.pdf" 
+     class="btn btn-download">
     <i class="fas fa-download"></i> Download
   </a>
 </div>
+
+<style>
+.resume-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 2rem auto;
+  display: block;
+}
+
+.resume-actions {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.btn-download {
+  background-color: #a259f7;
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-download:hover {
+  background-color: #7c3aed;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(162, 89, 247, 0.3);
+}
+</style>
