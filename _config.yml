@@ -59,7 +59,7 @@ assets:
     env:
 search:
   enabled: true
-  exclude: [ '/projects/**' ]   # if you don’t want to index projects
+  # exclude: [ '/projects/**' ]   # if you don’t want to index projects
   engine: lunr
 pwa:
   enabled: true
