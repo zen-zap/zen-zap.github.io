@@ -36,7 +36,7 @@ layout: default
     const canvas = document.getElementById('pdf-canvas');
     const ctx = canvas.getContext('2d');
 
-    const pdfPath = {{ '/assets/files/resume.pdf' | relative_url | jsonify }};
+    const pdfPath = "{{ site.url }}{{ site.baseurl }}/assets/files/resume.pdf";
     pdfjsLib.getDocument(pdfPath).promise.then(function(pdf) {
       pdfDoc = pdf;
       document.getElementById('page-info').textContent = `Page ${pageNum} of ${pdfDoc.numPages}`;
@@ -45,6 +45,9 @@ layout: default
         document.getElementById('next-page').style.display = 'inline-block';
       }
       renderPage(pageNum);
+    }).catch(function(error) {
+      console.error('Error loading PDF:', error);
+      document.getElementById('pdf-viewer').innerHTML = '<p>PDF could not be loaded. <a href="' + pdfPath + '" target="_blank">Click here to view PDF</a></p>';
     });
 
     function renderPage(num) {
