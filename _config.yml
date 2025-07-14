@@ -95,6 +95,12 @@ collections:
     output: true
     sort_by: date
     permalink: /projects/:path/
+  drafts:
+    output: false
+
+# Enable drafts in development
+show_drafts: true  
+
 defaults:
   - scope:
       path: ""
