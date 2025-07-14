@@ -3,8 +3,8 @@ backend:
   repo: zen-zap/zen-zap.github.io
   branch: main
   # site_domain: ashup.me
-  base_url: https://ashup-cms-oauth.onrender.com
-  auth_endpoint: auth
+  # base_url: https://ashup-cms-oauth.onrender.com
+  # auth_endpoint: auth
 
 # For local development testing -- false for production
 # local_backend: true
