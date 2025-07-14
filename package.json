@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "decap-cms-app": "^3.7.2",
-    "decap-server": "^3.3.0"
-  }
-}
