@@ -2,6 +2,9 @@ backend:
   name: github
   repo: zen-zap/zen-zap.github.io
   branch: main
+  # Explicitly disable Netlify detection
+  api_root: https://api.github.com
+  site_domain: false 
   # site_domain: ashup.me
   # base_url: https://ashup-cms-oauth.onrender.com
   # auth_endpoint: auth
@@ -70,4 +73,4 @@ collections:
           - {label: "Body", name: "body", widget: "markdown"}
 
 # Editorial workflow for drafts
-# publish_mode: editorial_workflow
+# publish_mode: editorial_workflow  
