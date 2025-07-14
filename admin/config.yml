@@ -2,7 +2,7 @@ backend:
   name: github
   repo: zen-zap/zen-zap.github.io
   branch: main
-  site_domain: ashup.me
+  # site_domain: ashup.me
   base_url: https://ashup-cms-oauth.onrender.com
   auth_endpoint: auth
 
