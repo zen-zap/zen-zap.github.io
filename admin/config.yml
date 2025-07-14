@@ -2,18 +2,24 @@ backend:
   name: github
   repo: zen-zap/zen-zap.github.io
   branch: main
-  # Explicitly disable Netlify detection
+
+  # point at GitHub’s API directly
   api_root: https://api.github.com
-  site_domain: false 
-  # site_domain: ashup.me
-  # base_url: https://ashup-cms-oauth.onrender.com
-  # auth_endpoint: auth
 
-# For local development testing -- false for production
-# local_backend: true
+  # use PATs instead of OAuth redirects
+  auth_type: token
+  # leave blank—Netlify CMS will ask you each time you log in,
+  # and your browser’s password-manager can auto‑fill it
+  token: ""
 
+  # if you ever want pure local dev (no Git calls), uncomment:
+  # local_backend: true
+
+# where Netlify CMS will store your uploaded images
 media_folder: "assets/img/posts"
 public_folder: "/assets/img/posts"
+
+# your site’s logo in the CMS UI
 logo_url: https://ashup.me/assets/img/g3.png
 
 collections:
@@ -23,14 +29,14 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Categories", name: "categories", widget: "list", required: false}
-      - {label: "Description", name: "description", widget: "text", required: false}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Layout",          name: "layout", widget: "hidden",  default: "post"}
+      - {label: "Title",           name: "title",  widget: "string"}
+      - {label: "Publish Date",    name: "date",   widget: "datetime"}
+      - {label: "Tags",            name: "tags",   widget: "list",     required: false}
+      - {label: "Categories",      name: "categories", widget: "list", required: false}
+      - {label: "Description",     name: "description", widget: "text", required: false}
+      - {label: "Featured Image",  name: "image",  widget: "image",    required: false}
+      - {label: "Body",            name: "body",   widget: "markdown"}
 
   - name: "projects"
     label: "Projects"
@@ -38,14 +44,14 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "project"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Layout",      name: "layout", widget: "hidden", default: "project"}
+      - {label: "Title",       name: "title",  widget: "string"}
+      - {label: "Date",        name: "date",   widget: "datetime"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Stack", name: "stack", widget: "string", required: false}
-      - {label: "GitHub URL", name: "github", widget: "string", required: false}
-      - {label: "Demo URL", name: "demo", widget: "string", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Stack",       name: "stack",  widget: "string", required: false}
+      - {label: "GitHub URL",  name: "github", widget: "string", required: false}
+      - {label: "Demo URL",    name: "demo",   widget: "string", required: false}
+      - {label: "Body",        name: "body",   widget: "markdown"}
 
   - name: "drafts"
     label: "Draft Posts"
@@ -53,13 +59,13 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Categories", name: "categories", widget: "list", required: false}
-      - {label: "Description", name: "description", widget: "text", required: false}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Layout",         name: "layout", widget: "hidden", default: "post"}
+      - {label: "Title",          name: "title",  widget: "string"}
+      - {label: "Tags",           name: "tags",   widget: "list",     required: false}
+      - {label: "Categories",     name: "categories", widget: "list", required: false}
+      - {label: "Description",    name: "description", widget: "text", required: false}
+      - {label: "Featured Image", name: "image",  widget: "image",    required: false}
+      - {label: "Body",           name: "body",   widget: "markdown"}
 
   - name: "pages"
     label: "Site Pages"
@@ -68,9 +74,10 @@ collections:
         name: "about"
         file: "_tabs/about.md"
         fields:
-          - {label: "Icon", name: "icon", widget: "string"}
+          - {label: "Icon",  name: "icon",  widget: "string"}
           - {label: "Order", name: "order", widget: "number"}
-          - {label: "Body", name: "body", widget: "markdown"}
+          - {label: "Body",  name: "body",  widget: "markdown"}
 
-# Editorial workflow for drafts
-# publish_mode: editorial_workflow  
+# If you want an editorial workflow (with draft/publish states),
+# uncomment the next line:
+# publish_mode: editorial_workflow
