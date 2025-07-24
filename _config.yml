@@ -93,7 +93,8 @@ collections:
     sort_by: order
   projects:
     output: true
-    sort_by: date
+    sort_by: name
+    sort_reverse: false
     permalink: /projects/:path/
   drafts:
     output: false
