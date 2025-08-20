@@ -1,5 +1,51 @@
-<!-- The comments switcher -->
-{% if page.comments and site.comments.provider %}
-  {% capture path %}comments/{{ site.comments.provider }}.html{% endcapture %}
-  {% include {{ path }} %}
-{% endif %}
+<div id="giscus-comment-thread"></div>
+
+<script>
+  // Function to set the Giscus theme
+  function setGiscusTheme(theme) {
+    const giscusFrame = document.querySelector('iframe.giscus-frame');
+    if (giscusFrame) {
+      giscusFrame.contentWindow.postMessage({ giscus: { setTheme: theme } }, 'https://giscus.app');
+    }
+  }
+
+  // Determine the Giscus theme based on the site's data-mode attribute
+  function getGiscusTheme() {
+    const mode = document.documentElement.getAttribute('data-mode') || 'dark';
+    // Use your site's dark theme for Giscus. You can customize this.
+    // Find more themes here: https://github.com/giscus/giscus/tree/main/styles/themes
+    return mode === 'light' ? 'light' : 'noborder_dark';
+  }
+
+  // Load the Giscus script
+  const giscusScript = document.createElement('script');
+  giscusScript.src = 'https://giscus.app/client.js';
+  giscusScript.setAttribute('data-repo', '{{ site.comments.giscus.repo }}');
+  giscusScript.setAttribute('data-repo-id', '{{ site.comments.giscus.repo_id }}');
+  giscusScript.setAttribute('data-category', '{{ site.comments.giscus.category }}');
+  giscusScript.setAttribute('data-category-id', '{{ site.comments.giscus.category_id }}');
+  giscusScript.setAttribute('data-mapping', '{{ site.comments.giscus.mapping }}');
+  giscusScript.setAttribute('data-strict', '{{ site.comments.giscus.strict }}');
+  giscusScript.setAttribute('data-reactions-enabled', '{{ site.comments.giscus.reactions_enabled }}');
+  giscusScript.setAttribute('data-emit-metadata', '{{ site.comments.giscus.emit_metadata }}');
+  giscusScript.setAttribute('data-input-position', '{{ site.comments.giscus.input_position }}');
+  giscusScript.setAttribute('data-lang', '{{ site.comments.giscus.lang }}');
+  giscusScript.setAttribute('data-theme', getGiscusTheme()); // Set initial theme
+  giscusScript.setAttribute('crossorigin', 'anonymous');
+  giscusScript.async = true;
+
+  document.getElementById('giscus-comment-thread').appendChild(giscusScript);
+
+  // Observer to watch for theme changes on the <html> element
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-mode') {
+        setGiscusTheme(getGiscusTheme());
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true
+  });
+</script>

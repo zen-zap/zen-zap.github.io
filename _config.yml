@@ -2,9 +2,9 @@ theme: jekyll-theme-chirpy
 lang: en
 timezone: Asia/Kolkata
 title: Ashutosh Panda
-tagline: I'm Batman
-description: finding ashu
-url: "https://zen-zap.github.io"
+tagline: saving the world
+description: know your saviour
+url: "https://ashup.me"
 github:
   username: zen-zap
 social:
@@ -32,7 +32,7 @@ analytics:
     id:
     domain:
   cloudflare:
-    id:
+    id: 8ca3aea407a6ff81d3fe1bfe595e1650
   fathom:
     id:
 pageviews:
@@ -110,7 +110,6 @@ defaults:
       layout: post
       comments: true
       toc: true
-      permalink: /posts/:title/
   - scope:
       path: _drafts
     values:
@@ -126,6 +125,7 @@ defaults:
       type: projects
     values:
       layout: project
+      comments: true
 sass:
   style: compressed
 compress_html:

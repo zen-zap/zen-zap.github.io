@@ -143,10 +143,10 @@ document.getElementById('next-page').addEventListener('click', onNextPage);
   height: auto;
 }
 
-/* Download button - violet color */
+/* Download button - theme accent color */
 .btn-download {
-  background-color: #a259f7; /* <-- EDIT THIS COLOR FOR DOWNLOAD BUTTON */
-  border-color: #a259f7;
+  background-color: var(--accent);
+  border-color: var(--accent);
   color: white;
   padding: 0.5rem 1rem;
   font-weight: 500;
@@ -156,11 +156,11 @@ document.getElementById('next-page').addEventListener('click', onNextPage);
 }
 
 .btn-download:hover {
-  background-color: #7c3aed; /* <-- EDIT THIS COLOR FOR DOWNLOAD BUTTON HOVER */
-  border-color: #7c3aed;
+  background-color: var(--accent-glow);
+  border-color: var(--accent-glow);
   color: white;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(162, 89, 247, 0.3);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
 }
 
 @media (max-width: 768px) {

@@ -32,7 +32,7 @@ permalink: /resume/
 }
 
 .btn-download {
-  background-color: #a259f7;
+  background-color: var(--accent);
   border: none;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -43,9 +43,9 @@ permalink: /resume/
 }
 
 .btn-download:hover {
-  background-color: #7c3aed;
+  background-color: var(--accent-glow);
   color: white;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(162, 89, 247, 0.3);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
 }
 </style>
