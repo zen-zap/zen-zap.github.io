@@ -4,59 +4,497 @@ permalink: /resume/
 title: Resume
 ---
 
-<div class="container resume-container">
-  <header class="page-header">
-    <h1 class="page-title">{{ page.title }}</h1>
-  </header>
+<!-- 
+  This version has been corrected by Gemini to achieve the classic two-column alignment.
+  - The header now uses Flexbox to perfectly align the name on the left and contact info on the right.
+  - All resume sections use `align-items: baseline` to ensure dates are perfectly level with titles.
+  - The HTML for contact info has been re-structured to match the target design.
+-->
 
-  <!-- Embed remote PNG from GitHub raw URL -->
-  <div class="resume-viewer">
-    <img src="https://raw.githubusercontent.com/zen-zap/zen-zap.github.io/main/assets/img/resume.png"
-         alt="Ashutosh Panda Resume"
-         class="resume-image"
-         loading="eager">
+<div class="resume">
+  <div class="header-section">
+    <h1 class="name">
+      <span class="first-name">Jon</span>
+      <span class="last-name">Gjengset</span>
+    </h1>
+    <div class="section contact">
+      <div class="content">
+        <div class="contact-item">
+          <span class="content">+1 (617) 390-4180</span>
+          <span class="label">Mobile</span>
+        </div>
+        <div class="contact-item">
+          <span class="content"><a href="mailto:zenzap@ashup.me">zenzap@ashup.me</a></span>
+          <span class="label">Email</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Download link unchanged -->
-  <div class="resume-actions">
-    <a href="{{ '/assets/files/resume.pdf' | relative_url }}"
-       download="Ashutosh_Panda_Resume.pdf"
-       class="btn btn-download">
-      <i class="fas fa-download"></i> Download
-    </a>
+  <div class="section educations listing">
+    <h2 class="section-header">Education</h2>
+    <div class="content">
+      <div class="education">
+        <div class="item-main">
+          <div class="listing-title">Massachusetts Institute of Technology</div>
+          <div class="listing-type">Doctor of Philosophy (PhD), Computer Science<br />CSAIL Parallel &amp; Distributed Operating Systems</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">2014 - 2020</div>
+          <div class="listing-stats"></div>
+        </div>
+      </div>
+      <div class="education">
+        <div class="item-main">
+          <div class="listing-title">University College London</div>
+          <div class="listing-type">Master of Science (MSc), Networked Computer Systems</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">2012 - 2013</div>
+          <div class="listing-stats">83%</div>
+        </div>
+      </div>
+      <div class="education">
+        <div class="item-main">
+          <div class="listing-title">Bond University</div>
+          <div class="listing-type">Bachelor of IT (cont'd), Computer Science</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">2009 - 2011</div>
+          <div class="listing-stats">93%</div>
+        </div>
+      </div>
+      <div class="education">
+        <div class="item-main">
+          <div class="listing-title">Universitetet i Oslo</div>
+          <div class="listing-type">Bachelor of IT, Computer Science</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">2008 - 2009</div>
+          <div class="listing-stats">A</div>
+        </div>
+      </div>
+      <div class="education">
+        <div class="item-main">
+          <div class="listing-title">Oslo Handelsgymnasium</div>
+          <div class="listing-type">High School</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">2005 - 2008</div>
+          <div class="listing-stats">95%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section positions listing">
+    <h2 class="section-header">Professional experience</h2>
+    <div class="content">
+      <div class="position">
+        <div class="item-main">
+          <div class="listing-title">Helsing</div>
+          <div class="listing-type">Software Engineer</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">August 2023 - Present</div>
+        </div>
+        <div class="listing-description"><p>Lead the company's continued investment in Rust, and work across Helsing's software stack to seek performance, reliability, and architecture improvements.</p></div>
+      </div>
+      <div class="position">
+        <div class="item-main">
+          <div class="listing-title">Amazon Web Services</div>
+          <div class="listing-type">Senior Software Development Engineer</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">November 2020 - May 2023</div>
+        </div>
+        <div class="listing-description"><p>Drive adoption of Rust internally at Amazon by building out the internal build infrastructure, and interacting with and contributing to the Rust ecosystem and community both internally and externally.</p></div>
+      </div>
+      <div class="position">
+        <div class="item-main">
+          <div class="listing-title">Aptoma AS</div>
+          <div class="listing-type">Software Engineer</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">August 2011 - June 2012</div>
+        </div>
+        <div class="listing-description"><p>Develop and maintain web-based software for Scandinavian media houses</p></div>
+      </div>
+      <div class="position">
+        <div class="item-main">
+          <div class="listing-title">Oksnøen Leir ANS</div>
+          <div class="listing-type">Assistant manager and web developer</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">June 2005 - Present</div>
+        </div>
+        <div class="listing-description"><p>Working as a supervisor for ~30 other camp leaders and ~200 children aged 7-16 every summer.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section page-break"></div>
+  
+  <div class="section positions listing">
+    <h2 class="section-header">Research experience</h2>
+    <div class="content">
+      <div class="position">
+        <div class="item-main">
+          <div class="listing-title">Noria: partially stateful view maintenance</div>
+          <div class="listing-type">as part of PhD thesis work at MIT</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">September 2014 - October 2020</div>
+        </div>
+        <div class="listing-description"><p>Building a relational view materialization dataflow system with support for partial state. Led to the publication of the <a href="https://www.usenix.org/conference/osdi18/presentation/gjengset">Noria paper</a> in OSDI'18 and ultimately, my <a href="https://jon.thesquareplanet.com/papers/phd-thesis.pdf">PhD dissertation</a>.</p></div>
+      </div>
+      <div class="position">
+        <div class="item-main">
+          <div class="listing-title">Determining user location using WiFi</div>
+          <div class="listing-type">with Kyle Jamieson, UCL</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">September 2013 - April 2014</div>
+        </div>
+        <div class="listing-description"><p>Building a practical implementation of <a href="https://www.usenix.org/system/files/conference/nsdi13/nsdi13-final51.pdf">ArrayTrack</a>. Led to the publication of our <a href="https://dl.acm.org/citation.cfm?doid=2639108.2639139">Phaser</a> paper in MobiCom'14.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section honors listing">
+    <h2 class="section-header">Honors</h2>
+    <div class="content">
+      <div class="honor">
+        <div class="item-main">
+          <div class="listing-title">Best presentation award, MobiCom '14</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">September 2014</div>
+        </div>
+        <div class="listing-description"><p>For the presentation of <a href="https://jon.tsp.io/papers/mobicom14-phaser.pdf">Phaser: Enabling Phased Array Signal Processing on Commodity WiFi Access Points</a> at MobiCom '14 in Maui, Hawaii.</p></div>
+      </div>
+      <div class="honor">
+        <div class="item-main">
+          <div class="listing-title">John Makepeace Bennett Medal for 2011</div>
+        </div>
+        <div class="item-side">
+          <div class="dates">February 2012</div>
+        </div>
+        <div class="listing-description"><p>The medal is awarded to the Bachelor of Information Technology student who has obtained the highest level of academic achievement in their studies of those graduating in a particular year.</p></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <style>
-/* Simplified styling */
-.resume-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  text-align: center;
+/* --- Theming Variables for Light/Dark Mode --- */
+:root {
+  --resume-bg: #FFFFFF;
+  --resume-text-color: #333;
+  --resume-accent-color: #28a7a7; /* Turquoise */
+  --resume-accent-text-color: #006868; /* Darker Turquoise for headings */
+  --resume-secondary-text-color: #555;
+  --resume-subtle-text-color: #888;
+  --resume-description-bg: rgba(245, 245, 245, 0.5); /* More subtle background */
+  --resume-border-color: #e5e5e5;
+  --resume-link-color: #177b7b;
 }
-.resume-viewer {
-  margin-bottom: 1.5rem;
+
+[data-theme="dark"] {
+  --resume-bg: #1e1e1e; /* Match dark mode background */
+  --resume-text-color: #f0f0f0; /* Brighter main text color */
+  --resume-accent-color: #33c9c9; /* Brighter Turquoise for dark bg */
+  --resume-accent-text-color: #66d9d9;
+  --resume-secondary-text-color: #d0d0d0; /* Much brighter for descriptions */
+  --resume-subtle-text-color: #cac7c7ff; /* Brighter for better contrast */
+  --resume-description-bg: rgba(45, 45, 45, 0.3); /* Semi-transparent dark */
+  --resume-border-color: #2a2a2a; /* Match background to hide border */
 }
-.resume-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(136, 19, 19, 0.1);
+
+/* --- Base Styles --- */
+.resume {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--resume-text-color);
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2em 1em;
 }
-.resume-actions .btn-download {
-  background-color: #0c1113; /* Dark background */
-  border: none;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
+
+.resume a {
+  color: var(--resume-link-color);
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.resume a:hover {
+  text-decoration: underline;
+}
+
+/* --- Header Section (KEY FIX) --- */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-bottom: 0.3em;
+}
+
+.name {
+  font-size: 2.8em;
+  font-weight: 700;
+  color: var(--resume-accent-text-color);
+  margin: 0;
+}
+
+.headline {
+  display: block;
+  font-size: 0.5em;
   font-weight: 500;
-  transition: all 0.2s ease;
+  color: var(--resume-secondary-text-color);
+  margin-top: -0.5em;
 }
-.resume-actions .btn-download:hover {
-  background-color: var(--accent-glow);
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
+
+/* --- Contact Section (KEY FIX) --- */
+.contact {
+  text-align: right;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  flex-shrink: 0; /* Prevents it from wrapping too early */
 }
+.contact h2 { display: none; }
+.contact .content {
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  /* Using line-height for spacing control instead of gap */
+}
+.contact .content .contact-item {
+  line-height: 0; /* Adjust this value to control spacing between Mobile/Email */
+}
+.contact-item {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 1em;
+}
+.contact .label {
+  color: var(--resume-subtle-text-color);
+  font-size: 0.9em;
+}
+.contact span.content {
+  font-weight: 500;
+}
+
+
+/* --- Main Section Layout --- */
+.resume .section {
+  position: relative; /* Required for absolute positioned headers */
+  display: block; /* Changed from flex to block for better control */
+  padding-bottom: 0.3em; /* Reduced from 2.5em */
+  /* border-bottom: removed completely */
+  margin-bottom: 0.3em; /* Reduced from 2em */
+  padding-top: 0.5em; /* ADDED: Aligns content with the floating header */
+}
+.resume .section:last-child {
+  margin-bottom: 0;
+}
+
+.section-header {
+  position: absolute;
+  left: 40px; /* Moved inward from left: 0 */
+  width: 180px; /* Reduced width to bring closer to content */
+  text-align: right;
+  padding-right: 2em;
+  font-weight: 600;
+  font-size: 1.65em; /* INCREASED SIZE (1.1 * 1.5) */
+  color: var(--resume-accent-color);
+  box-sizing: border-box;
+}
+
+.section > .content {
+  margin-left: 220px; /* Same left margin for all content - matches header width */
+  padding-left: 0;
+}
+
+/* --- Listing Items Layout (KEY FIX) --- */
+.listing .content > div + div {
+  margin-top: 1.8em;
+}
+
+.listing .education, .listing .position, .listing .honor {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; /* This ensures title and date are level */
+  flex-wrap: wrap;
+}
+
+.item-main {  
+  flex: 1;  
+  padding-left: 0;  /* Ensure consistent left alignment */
+  margin-left: 0;   /* Ensure consistent left alignment */
+}
+.item-side {
+  flex: 0 0 200px;
+  text-align: right;
+  font-size: 0.85em;
+  color: var(--resume-subtle-text-color);
+  margin-left: 1.5em;
+}
+
+.listing-title {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--resume-accent-text-color);
+}
+
+.listing-type {
+  font-size: 0.9em;
+  color: var(--resume-secondary-text-color);
+  margin-top: 0.1em;
+}
+
+.listing-stats {
+  font-weight: 500;
+}
+
+.listing-description {
+  width: 100%;
+  background-color: transparent; /* Transparent background */
+  color: var(--resume-secondary-text-color); /* Light mode text color */
+  padding: 0.8em 1.2em;
+  margin-top: 0.8em;
+  border-radius: 6px;
+  font-size: 0.95em;
+}
+
+/* Dark mode text color for listing descriptions */
+[data-theme="dark"] .listing-description {
+  color: var(--resume-secondary-text-color); /* Dark mode text color - you can modify this */
+}
+.listing-description p { margin: 0; }
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .resume { padding: 1.5em 0.5em; }
+
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2em;
+  }
+
+  .name {
+    margin-bottom: 1em;
+  }
+
+  .contact {
+    text-align: left;
+    width: 100%;
+    position: static; /* Let it be in the normal flow */
+  }
+  .contact-item {
+    justify-content: flex-start;
+  }
+   .contact .content {
+    font-size: 1em;
+   }
+
+  .resume .section {
+    display: flex; /* Revert to flex for mobile */
+    flex-direction: column;
+    align-items: flex-start; /* Change alignment for mobile */
+    padding-top: 0; /* Reset padding */
+  }
+
+  .section-header {
+    position: static; /* Revert positioning */
+    width: auto;
+    text-align: left;
+    padding-right: 0;
+    margin-bottom: 1em;
+    font-size: 1.3em; /* Keep a reasonable size for mobile */
+  }
+
+  .section > .content {
+    margin-left: 0;
+  }
+  
+  .listing .education, .listing .position, .listing .honor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-side {
+    text-align: left;
+    margin-left: 0;
+    margin-top: 0.5em;
+  }
+}
+
+.section.page-break { display: none; }
 </style>
+
+<script>
+// The JavaScript for grouping items does not need changes.
+// It is preserved here as it was.
+var listings = document.getElementsByClassName('listing-title');
+var ptitle = "";
+var pgroup = 0;
+for (var i = 0; i < listings.length+1; i++) {
+  var t = (i === listings.length ? "" : listings.item(i).textContent);
+  if (t.indexOf('First in Class') === 0) {
+    t = "First in Class";
+  }
+
+  if (t == ptitle && t.indexOf('MIT Teaching') === -1) {
+    var itemToHide = listings.item(i-1).closest('.honor, .education, .position');
+    if (itemToHide) {
+        itemToHide.style.display = 'none';
+    }
+    pgroup++;
+  } else {
+    if (pgroup > 1) {
+      var lastVisibleItem = listings.item(i-1).closest('.honor, .education, .position');
+      if (lastVisibleItem) {
+          lastVisibleItem.classList.add("grouped");
+          var datesContainer = lastVisibleItem.querySelector('.item-side .dates');
+          if(datesContainer) {
+              var cnt = document.createElement('div');
+              cnt.className = "dates count";
+              cnt.textContent = "(" + pgroup + " times)";
+              datesContainer.parentNode.insertBefore(cnt, datesContainer);
+              datesContainer.style.display = 'none';
+          }
+      }
+    }
+    ptitle = t;
+    pgroup = 1;
+  }
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains("dates") && e.target.classList.contains("count")) {
+    var parentItem = e.target.closest('.grouped');
+    if(parentItem) {
+        var el = parentItem.previousSibling;
+        parentItem.classList.remove('grouped');
+        var originalDates = parentItem.querySelector('.item-side .dates');
+        if (originalDates) originalDates.style.display = 'block';
+        e.target.remove();
+        
+        while (true) {
+          while (el && el.nodeType != 1) {
+            el = el.previousSibling
+          }
+          if (!el || el.style.display != "none") {
+            break;
+          }
+          el.style.display = "flex";
+          el = el.previousSibling
+        }
+    }
+  }
+}, false);
+</script>
+
