@@ -1,0 +1,106 @@
+# Personal Information
+personal:
+  first_name: "Ashutosh"
+  last_name: "Panda"
+  phone: "+91-934-854-9003"
+  email: "ashutoshp.ug23.ec@nitp.ac.in"
+  github: "zen-zap"
+  website: "ashup.me"
+
+# Education Section
+education:
+  - institution: "National Institute of Technology, Patna"
+    degree: "Bachelor of Technology in Electronics and Communication"
+    field: ""
+    dates: "Jun 2023 -- Present"
+    grade: "CGPA: 7.69/10"
+  
+  - institution: "Saraswati Vidya Mandir"
+    degree: "Senior Secondary"
+    field: ""
+    dates: "May 2021 -- May 2023"
+    grade: "Percentage: 80.83%"
+
+# Projects Section
+projects:
+  - name: "Plero – AI Code Completion Editor"
+    technologies: "TypeScript, Electron, Vite, OpenAI API"
+    date: "June 2025"
+    github: "https://github.com/zen-zap/plero"
+    description:
+      - "Built a Retrieval-Augmented Generation (RAG) pipeline with local vector search to improve context grounding."
+      - "Refined token chunking and embedding strategies to lower cost/latency while preserving accuracy."
+      - "Created a performance benchmarking suite to evaluate latency across chat, web, and reasoning workflows."
+      - "Designed a type-safe IPC contract ensuring robust communication between main and renderer processes."
+      - "Reduced inference time via embedding cache implementation and prompt optimizations."
+
+  - name: "ROC – Client-Server Database"
+    technologies: "Rust, quinn, Tokio"
+    date: "Feb 2025"
+    github: "https://github.com/zen-zap/ROC"
+    description:
+      - "Built an asynchronous key-value database with user-scoped data isolation and crash recovery."
+      - "Implemented secure client-server communication over QUIC protocol with TLS encryption."
+      - "Developed core database operations (SET, GET, DELETE, RANGE, LIST) using actor-based concurrency."
+      - "Added Write-Ahead Logging (WAL) for durability and persistent user session management with UUIDs."
+
+  - name: "x86_64 Operating System"
+    technologies: "Rust, bootloader, QEMU"
+    date: "Mar 2025"
+    github: "https://github.com/zen-zap/blog_os"
+    description:
+      - "Implemented VGA text buffer driver for kernel-level text rendering."
+      - "Integrated CPU exception and interrupt handlers enabling responsive keyboard input."
+      - "Established virtual memory management with 4-level page tables and a bump allocator."
+      - "Designed cooperative multitasking via async/await and a custom task executor."
+      - "Wrote kernel-level integration tests for OS subsystem validation."
+
+  - name: "Mini TCP – Userspace TCP/IP Stack"
+    technologies: "Rust, etherparse, tshark"
+    date: "Jan 2025"
+    github: "https://github.com/zen-zap/mini_tcp"
+    description:
+      - "Engineered a minimal TCP/IP stack in userspace with full packet-handling control."
+      - "Implemented parts of RFC 793 compliant TCP state machine from the ground up."
+      - "Created low-level packet parsing for payload extraction, resolving protocol edge cases."
+      - "Developed concurrent connection manager with mutex-based synchronization."
+
+# Technical Skills Section
+technical_skills:
+  - category: "Programming Languages"
+    skills: ["Rust", "C", "C++", "Java", "Python", "TypeScript"]
+  
+  - category: "Technologies & Frameworks"
+    skills: ["AWS", "TensorFlow", "LangChain", "PyTorch"]
+  
+  - category: "Developer Tools"
+    skills: ["VS Code", "Neovim", "Jetbrains", "Git & GitHub", "Docker", "Kubernetes", "Postman"]
+  
+  - category: "Coursework"
+    skills: ["Data Structures", "Object-Oriented Programming", "Computer Networks"]
+
+# Certifications Section
+certifications:
+  - name: "Python"
+    description: "Developed various programs using Python libraries like web scrapers and tic-tac-toe"
+    date: "Jan 2024"
+    link: "https://drive.google.com/file/d/1Y_mC6UpXhLIp-iVJfE0Up_1q4qa11qgm/view?usp=sharing"
+  
+  - name: "Machine Learning"
+    description: "Built supervised and unsupervised ML models using Python libraries"
+    date: "Apr 2024"
+    link: "https://drive.google.com/file/d/1UPEYT7Bh3_h8BlRYgOpt_tLt-wHQzvGW/view?usp=sharing"
+  
+  - name: "Cloud & DevOps"
+    description: "Deployed and scaled apps using AWS services"
+    date: "June 2024"
+    link: "https://drive.google.com/file/d/1LPRvIwBquxQXAS1R7XGuPns4MERiOZaA/view?usp=sharing"
+
+# Position of Responsibilities Section
+responsibilities:
+  - organization: "Team Gray Interface, HackSlash"
+    position: "Member"
+    dates: "Apr 2024 - Present"
+    link: "https://hackslash.co.in/"
+    description:
+      - "Collaborated on deep learning projects (Neural Style Transfer, GPT modeling) and containerized models for reproducible deployment."
