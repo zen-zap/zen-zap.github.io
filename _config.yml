@@ -9,7 +9,7 @@ github:
   username: zen-zap
 social:
   name: Ashutosh Panda
-  email: zenzap34@gmail.com
+  email: zenzap@ashup.me
   links:
     - https://github.com/zen-zap
     - https://discord.com/users/1128746304189780118
@@ -38,7 +38,7 @@ analytics:
 pageviews:
   provider: goatcounter
 theme_mode:
-cdn: "/assets/img"
+cdn: 
 avatar: g3.png
 social_preview_image:
 toc: true

@@ -25,4 +25,4 @@ I like to write about whatever I learn, so you can find some of my articles on M
 
 You can poke around my projects on my Github. I keep them updated with whatever I'm working on.
 
-If you got an idea or want to work with me on something, I would love to hear from you! You can find my info on the sidebar.
+If you got an idea or want to work with me on something, I would love to hear from you! You can reach out to me via discord or email.
