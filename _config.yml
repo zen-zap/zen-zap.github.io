@@ -38,7 +38,7 @@ analytics:
 pageviews:
   provider: goatcounter
 theme_mode:
-cdn: 
+cdn: "/assets/img"
 avatar: g3.png
 social_preview_image:
 toc: true
