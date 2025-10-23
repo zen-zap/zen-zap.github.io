@@ -6,5 +6,6 @@ description: "A minimal Shell in Rust."
 stack: "Rust"
 github: https://github.com/zen-zap/rune
 comments: true
+toc: true
 ---
 

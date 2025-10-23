@@ -1,129 +1,211 @@
 ---
 layout: default
+refactor: true
+panel_includes:
+  - toc
+tail_includes:
+  - related-posts
+  - post-nav
+  - comment
 ---
 
-<div class="container">
-  <h1>{{ page.title }}</h1>
-  
-  <div class="project-meta">
-    {% if page.stack %}
-      <p><strong>Stack:</strong> {{ page.stack }}</p>
+{% include lang.html %}
+
+{% include toc-status.html %}
+
+<article class="px-1" data-toc="{{ enable_toc }}">
+  <header>
+    <h1 data-toc-skip>{{ page.title }}</h1>
+    {% if page.description %}
+      <p class="post-desc fw-light mb-4">{{ page.description }}</p>
     {% endif %}
-    {% if page.github %}
-      <p><strong>GitHub:</strong> <a href="{{ page.github }}" target="_blank">{{ page.github }}</a></p>
-    {% endif %}
-    {% if page.demo %}
-      <p><strong>Demo:</strong> <a href="{{ page.demo }}" target="_blank">{{ page.demo }}</a></p>
-    {% endif %}
-  </div>
-  
-  <div class="project-content">
+
+    <div class="post-meta text-muted">
+      <!-- Project metadata -->
+      {% if page.stack or page.github or page.demo %}
+        <div class="project-meta mb-3">
+          {% if page.stack %}
+            <span class="me-3">
+              <i class="fas fa-tools fa-fw me-1"></i>
+              <strong>Stack:</strong> {{ page.stack }}
+            </span>
+          {% endif %}
+          {% if page.github %}
+            <span class="me-3">
+              <i class="fab fa-github fa-fw me-1"></i>
+              <a href="{{ page.github }}" target="_blank" rel="noopener">GitHub</a>
+            </span>
+          {% endif %}
+          {% if page.demo %}
+            <span>
+              <i class="fas fa-external-link-alt fa-fw me-1"></i>
+              <a href="{{ page.demo }}" target="_blank" rel="noopener">Demo</a>
+            </span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <!-- published date -->
+      <span>
+        {{ site.data.locales[lang].post.posted }}
+        {% include datetime.html date=page.date tooltip=true lang=lang %}
+      </span>
+
+      <!-- lastmod date -->
+      {% if page.last_modified_at and page.last_modified_at != page.date %}
+        <span>
+          {{ site.data.locales[lang].post.updated }}
+          {% include datetime.html date=page.last_modified_at tooltip=true lang=lang %}
+        </span>
+      {% endif %}
+
+      {% if page.image %}
+        {% capture src %}src="{{ page.image.path | default: page.image }}"{% endcapture %}
+        {% capture class %}class="preview-img{% if page.image.no_bg %}{{ ' no-bg' }}{% endif %}"{% endcapture %}
+        {% capture alt %}alt="{{ page.image.alt | xml_escape | default: "Preview Image" }}"{% endcapture %}
+
+        {% if page.image.lqip %}
+          {%- capture lqip -%}lqip="{{ page.image.lqip }}"{%- endcapture -%}
+        {% endif %}
+
+        <div class="mt-3 mb-3">
+          <img {{ src }} {{ class }} {{ alt }} w="1200" h="630" {{ lqip }}>
+          {%- if page.image.alt -%}
+            <figcaption class="text-center pt-2 pb-2">{{ page.image.alt }}</figcaption>
+          {%- endif -%}
+        </div>
+      {% endif %}
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          {% if page.author %}
+            {% assign authors = page.author %}
+          {% elsif page.authors %}
+            {% assign authors = page.authors %}
+          {% endif %}
+
+          {{ site.data.locales[lang].post.written_by }}
+
+          <em>
+            {% if authors %}
+              {% for author in authors %}
+                {% if site.data.authors[author].url -%}
+                  <a href="{{ site.data.authors[author].url }}">{{ site.data.authors[author].name }}</a>
+                {%- else -%}
+                  {{ site.data.authors[author].name }}
+                {%- endif %}
+                {% unless forloop.last %}{{ '</em>, <em>' }}{% endunless %}
+              {% endfor %}
+            {% else %}
+              <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>
+            {% endif %}
+          </em>
+        </span>
+
+        <div>
+          <!-- pageviews -->
+          {% if site.pageviews.provider and site.analytics[site.pageviews.provider].id %}
+            <span>
+              <em id="pageviews">
+                <i class="fas fa-spinner fa-spin small"></i>
+              </em>
+              {{ site.data.locales[lang].post.pageview_measure }}
+            </span>
+          {% endif %}
+
+          <!-- read time -->
+          {% include read-time.html content=content prompt=true lang=lang %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {% if enable_toc %}
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">{{ page.title }}</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">{{- site.data.locales[lang].panel.toc -}}</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">{{- page.title -}}</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  {% endif %}
+
+  <div class="content">
     {{ content }}
   </div>
 
-  <!-- Project Sharing -->
-  <div class="post-tail-wrapper text-muted mt-5">
-    <div class="post-tail-bottom d-flex justify-content-between align-items-center pt-3">
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    {% if page.categories.size > 0 %}
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        {% for category in page.categories %}
+          <a href="{{ site.baseurl }}/categories/{{ category | slugify | url_encode }}/">{{ category }}</a>
+          {%- unless forloop.last -%},{%- endunless -%}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- tags -->
+    {% if page.tags.size > 0 %}
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        {% for tag in page.tags %}
+          <a
+            href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
+            class="post-tag no-text-decoration"
+          >
+            {{- tag -}}
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
       <div class="license-wrapper">
-        <span class="text-muted">See ya!</span>
+        {% if site.data.locales[lang].copyright.license.template %}
+          {% capture _replacement %}
+        <a href="{{ site.data.locales[lang].copyright.license.link }}">
+          {{ site.data.locales[lang].copyright.license.name }}
+        </a>
+        {% endcapture %}
+
+          {{ site.data.locales[lang].copyright.license.template | replace: ':LICENSE_NAME', _replacement }}
+        {% endif %}
       </div>
-      <div class="share-wrapper">
-        {% assign lang = site.lang | default: 'en' %}
-        {% include post-sharing.html lang=lang %}
-      </div>
+
+      {% include post-sharing.html lang=lang %}
     </div>
+    <!-- .post-tail-bottom -->
   </div>
-
-  <!-- Project Navigation - revert to default button look (no custom hover transforms) -->
-  <nav class="project-navigation post-navigation d-flex justify-content-between mt-5" aria-label="Project Navigation">
-    {% assign projects = site.projects | sort: 'date' %}
-    {% assign current_index = nil %}
-    {% for project in projects %}
-      {% if project.url == page.url %}
-        {% assign current_index = forloop.index0 %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-    
-    {% if current_index %}
-      {% assign prev_index = current_index | minus: 1 %}
-      {% assign next_index = current_index | plus: 1 %}
-      {% assign prev_project = projects[prev_index] %}
-      {% assign next_project = projects[next_index] %}
-    {% endif %}
-
-    {% if prev_project %}
-      <a href="{{ prev_project.url | relative_url }}" class="btn btn-outline-primary" aria-label="Previous"> 
-        <p>{{ prev_project.title }}</p>
-      </a>
-    {% else %}
-      <div class="btn btn-outline-primary disabled" aria-label="Previous">
-        <p>-</p>
-      </div>
-    {% endif %}
-
-    {% if next_project %}
-      <a href="{{ next_project.url | relative_url }}" class="btn btn-outline-primary" aria-label="Next">
-        <p>{{ next_project.title }}</p>
-      </a>
-    {% else %}
-      <div class="btn btn-outline-primary disabled" aria-label="Next">
-        <p>-</p>
-      </div>
-    {% endif %}
-  </nav>
-
-  <!-- Comments Section -->
-  {% if site.comments.provider and page.comments != false %}
-    <div id="post-comments" class="mt-5">
-      <div class="pt-5">
-        {% include comment.html %}
-      </div>
-    </div>
-  {% endif %}
-</div>
-
-<!-- Floating TOC - Top Right -->
-<aside aria-label="Project TOC" id="project-toc-panel" class="d-none d-xl-block" style="position: fixed; top: 120px; right: 24px; width: clamp(240px,18vw,300px); max-height: 70vh; z-index: 50;">
-  <section class="project-toc-section">
-    <div class="toc-header d-flex justify-content-between align-items-center">
-      <h2 class="panel-heading mb-0">Contents</h2>
-      <div class="d-flex gap-1">
-        <button type="button" class="btn btn-sm btn-link text-muted toc-expand-all" title="Expand/Collapse All" aria-label="Expand or Collapse All">
-          <i class="fas fa-compress-arrows-alt"></i>
-        </button>
-      </div>
-    </div>
-    <div class="toc-content mt-2">
-      <ul id="project-toc" class="toc-root list-unstyled mb-0"></ul>
-    </div>
-  </section>
-</aside>
-
-<!-- Floating Notes - Bottom Right -->
-{% if page.notes %}
-<aside aria-label="Project Notes" id="project-notes-panel" class="d-none d-xl-block" style="position: fixed; bottom: 24px; right: 24px; width: clamp(250px,18vw,320px); max-height: 38vh; z-index: 50;">
-  <section class="project-notes-section">
-    <h2 class="panel-heading d-flex align-items-center mb-2">
-      <i class="fas fa-sticky-note me-2"></i>Notes
-    </h2>
-    <div class="notes-content">
-      {{ page.notes | markdownify }}
-    </div>
-  </section>
-</aside>
-{% endif %}
+  <!-- div.post-tail-wrapper -->
+</article>
 
 <style>
-/* Hide default panel on project pages */
-#panel-wrapper { display: none !important; }
-
 /* Accent quick tweak */
 :root { --accent: #16c1b8; --accent-glow: #22e6db; --accent-rgb: 22,193,184; }
 
-.project-navigation .btn { border-radius: var(--btn-border-radius, .5rem); }
-
-/* Card tweaks */
+/* Card tweaks for project listing */
 .projects-list { gap: 1.25rem; }
 .card-wrapper.card.project-card { 
   border: 1px solid rgba(var(--accent-rgb),0.12);
@@ -134,172 +216,18 @@ layout: default
   box-shadow: 0 8px 24px -10px rgba(0,0,0,0.55), 0 0 0 1px rgba(24,52,56,0.35);
   transition: transform .35s ease, box-shadow .35s ease, background .4s;
 }
-.card-wrapper.card.project-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(var(--accent-rgb),0.4); background: linear-gradient(155deg, rgba(16,40,42,0.9) 0%, rgba(8,20,22,0.95) 100%); }
+.card-wrapper.card.project-card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: 0 14px 34px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(var(--accent-rgb),0.4); 
+  background: linear-gradient(155deg, rgba(16,40,42,0.9) 0%, rgba(8,20,22,0.95) 100%); 
+}
 .card-wrapper.card.project-card .card-title { font-size: 1.2rem; letter-spacing: .3px; }
 .card-wrapper.card.project-card .card-text { opacity: .78; }
 
-/* === Light/Dark specific styling for TOC & Notes === */
-/* Base reset */
-.project-toc-section, .project-notes-section { transition: background .35s ease, border-color .35s ease, box-shadow .4s; }
-
-/* Light mode */
-html[data-mode='light'] .project-toc-section { background: rgba(255,255,255,0.72); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 18px -6px rgba(0,0,0,0.15); backdrop-filter: blur(10px); }
-html[data-mode='light'] .project-toc-section:hover { background: rgba(255,255,255,0.85); }
-html[data-mode='light'] .project-toc-section .panel-heading { color: #3a5557; }
-html[data-mode='light'] #project-toc .toc-link { color: #566d70; }
-html[data-mode='light'] #project-toc .toc-link:hover { background: rgba(var(--accent-rgb),0.12); }
-html[data-mode='light'] #project-toc .level-1 > .toc-link { color: #213335; }
-
-html[data-mode='light'] .project-notes-section { background: linear-gradient(170deg, rgba(245,249,249,0.92), rgba(232,244,244,0.95)); border: 1px solid rgba(var(--accent-rgb),0.25); box-shadow: 0 8px 26px -10px rgba(0,0,0,0.18), 0 0 0 1px rgba(var(--accent-rgb),0.25); }
-html[data-mode='light'] .project-notes-section .panel-heading { color: var(--accent); }
-html[data-mode='light'] #project-notes-panel .notes-content code { background: rgba(var(--accent-rgb),0.18); }
-
-/* Dark mode */
-html:not([data-mode]), html[data-mode='dark'] .project-toc-section { 
-  background: rgba(12,28,30,0.42); 
-  border: 1.5px solid rgba(var(--accent-rgb),0.35); 
-  box-shadow: 0 8px 26px -12px rgba(0,0,0,0.6), 0 0 0 1px rgba(18,44,46,0.6); 
-  backdrop-filter: blur(6px); 
-}
-html[data-mode='dark'] .project-toc-section:hover { 
-  background: rgba(14,34,36,0.55); 
-  border-color: rgba(var(--accent-rgb),0.45);
-}
-html[data-mode='dark'] .project-toc-section .panel-heading { color: var(--text-muted-color); }
-
-html:not([data-mode]), html[data-mode='dark'] .project-notes-section { 
-  background: linear-gradient(175deg, rgba(35, 77, 80, 0.9) 0%, rgba(10,26,28,0.92) 65%); 
-  border: 1.5px solid rgba(var(--accent-rgb),0.38); 
-  box-shadow: 0 10px 30px -14px rgba(0,0,0,0.55), 0 0 0 1px rgba(20,46,48,0.65); 
-}
-html[data-mode='dark'] .project-notes-section:hover {
-  border-color: rgba(var(--accent-rgb),0.48);
-}
-html[data-mode='dark'] .project-notes-section .panel-heading { color: var(--accent); }
-html[data-mode='dark'] #project-notes-panel .notes-content code { background: rgba(var(--accent-rgb),0.12); color: var(--accent); }
-
-/* Shared inner element styles */
-.project-notes-section { border-radius: 16px; padding: .9rem 1rem 1.05rem; overflow:hidden; }
-.project-notes-section .panel-heading { font-size: .9rem; font-weight: 600; letter-spacing: .4px; }
-#project-notes-panel .notes-content { max-height: 22vh; font-size: .85rem; line-height: 1.45; scrollbar-color: rgba(var(--accent-rgb),0.35) transparent; }
-#project-notes-panel .notes-content code { border-radius: 4px; padding: .15rem .35rem; font-size: .75rem; }
-
-.project-toc-section { border-radius: 16px; padding: .85rem .85rem .9rem; }
-.project-toc-section .panel-heading { font-size: .85rem; font-weight: 500; opacity: .85; }
-#project-toc { font-size: .8rem; line-height: 1.3; }
-#project-toc .toc-item { margin: 0; padding: 0; }
-#project-toc .toc-link { display: inline-block; padding: .18rem .25rem; border-radius: 6px; text-decoration: none; opacity: .72; max-width: 100%; }
-#project-toc .toc-link:hover { opacity:1; color: var(--accent); background: rgba(var(--accent-rgb),0.10); }
-#project-toc .level-1 > .toc-link { font-weight:600; opacity:.9; }
-#project-toc .level-2 > .toc-link { padding-left: .25rem; }
-#project-toc .level-3 > .toc-link { opacity:.6; }
-#project-toc .toc-sublist { list-style:none; margin: .15rem 0 .25rem .75rem; padding:0; }
-#project-toc .collapsed > .toc-sublist { display:none; }
-#project-toc .toc-collapse { background:none; border:none; padding:0; margin-right:.25rem; color: var(--text-muted-color); cursor:pointer; font-size:.65rem; width:1rem; }
-#project-toc .toc-item.has-children > .toc-collapse { display:inline-block; }
-#project-toc .toc-item:not(.has-children) > .toc-collapse { visibility:hidden; }
-#project-toc-panel .toc-content { max-height: 58vh; overflow-y:auto; }
-#project-toc-panel, #project-notes-panel { overflow: visible; }
-
-/* Responsive - Hide floating TOC completely on mobile/tablets */
+/* Responsive adjustments */
 @media (max-width: 1199.98px) { 
-  #project-toc-panel, #project-notes-panel { 
-    display: none !important; 
-    visibility: hidden !important;
-  } 
   .card-wrapper.card.project-card { 
     border-radius: 14px; 
   }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  function buildHeadingTree() {
-    const content = document.querySelector('.project-content');
-    if (!content) return [];
-    const heads = content.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    const root = [];
-    const stack = [];
-    heads.forEach((h, idx) => {
-      const level = parseInt(h.tagName[1]);
-      const id = h.id || `heading-${idx}`;
-      if (!h.id) h.id = id;
-      const node = { level, id, text: h.textContent.trim(), children: [] };
-      while (stack.length && stack[stack.length-1].level >= level) stack.pop();
-      if (stack.length === 0) root.push(node); else stack[stack.length-1].children.push(node);
-      stack.push(node);
-    });
-    return root;
-  }
-  function renderTree(nodes) {
-    return nodes.map(n => {
-      const has = n.children.length > 0;
-      return `<li class="toc-item level-${n.level} ${has ? 'has-children' : ''}" data-level="${n.level}">
-        <button class="toc-collapse" aria-label="Toggle Section" aria-expanded="true"><i class="fas fa-chevron-down"></i></button>
-        <a href="#${n.id}" class="toc-link">${n.text}</a>
-        ${has ? `<ul class="toc-sublist">${renderTree(n.children)}</ul>` : ''}
-      </li>`;
-    }).join('');
-  }
-  function generateTOC() {
-    const toc = document.getElementById('project-toc');
-    const tree = buildHeadingTree();
-    
-    if (!tree.length) {
-      const emptyMessage = '<li class="text-muted small">No headings found</li>';
-      if (toc) toc.innerHTML = emptyMessage;
-      return;
-    }
-    
-    const tocHtml = renderTree(tree);
-    if (toc) toc.innerHTML = tocHtml;
-    
-    // Setup click handlers for TOC
-    if (toc) {
-      toc.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          const target = document.querySelector(a.getAttribute('href'));
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      });
-    }
-  }
-  function setupCollapsing() {
-    // Setup collapsing for desktop TOC
-    const toc = document.querySelector('#project-toc');
-    if (!toc) return;
-    
-    toc.addEventListener('click', e => {
-      const btn = e.target.closest('.toc-collapse');
-      if (!btn) return;
-      const item = btn.closest('.toc-item');
-      if (!item.classList.contains('has-children')) return;
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      const icon = btn.querySelector('i');
-      if (expanded) { item.classList.add('collapsed'); icon.className = 'fas fa-chevron-right'; }
-      else { item.classList.remove('collapsed'); icon.className = 'fas fa-chevron-down'; }
-    });
-  }
-  function setupExpandAll() {
-    const toggle = document.querySelector('.toc-expand-all');
-    if (!toggle) return;
-    let allCollapsed = false;
-    toggle.addEventListener('click', () => {
-      const items = document.querySelectorAll('#project-toc .toc-item.has-children');
-      allCollapsed = !allCollapsed;
-      items.forEach(it => {
-        const btn = it.querySelector('.toc-collapse');
-        const icon = btn.querySelector('i');
-        if (allCollapsed) { it.classList.add('collapsed'); btn.setAttribute('aria-expanded','false'); icon.className='fas fa-chevron-right'; }
-        else { it.classList.remove('collapsed'); btn.setAttribute('aria-expanded','true'); icon.className='fas fa-chevron-down'; }
-      });
-    });
-  }
-  generateTOC();
-  setupCollapsing();
-  setupExpandAll();
-});
-</script>

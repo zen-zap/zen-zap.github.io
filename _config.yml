@@ -129,6 +129,7 @@ defaults:
     values:
       layout: project
       comments: true
+      toc: true
 sass:
   style: compressed
 compress_html:

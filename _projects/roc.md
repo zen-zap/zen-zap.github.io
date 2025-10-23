@@ -6,6 +6,7 @@ description: "A database built in Rust."
 stack: "Rust, QUIC, JSON"
 github: https://github.com/zen-zap/ROC
 comments: true
+toc: true
 ---
 
 # ROC Database
