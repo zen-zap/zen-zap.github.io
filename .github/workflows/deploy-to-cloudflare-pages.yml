@@ -1,0 +1,40 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+env:
+  JEKYLL_ENV: production
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3' # adjust to match your Gemfile.lock if needed
+          cache: 'bundler'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libffi-dev libxml2 libxml2-dev libxslt1-dev
+
+      - name: Install Ruby dependencies
+        run: bundle install --jobs=4 --retry=3
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --destination _site
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          command: pages publish ./_site --project-name ${{ secrets.CF_PAGES_PROJECT_NAME }} --branch main

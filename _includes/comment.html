@@ -1,3 +1,6 @@
+<!-- Custom Giscus Styling -->
+<link rel="stylesheet" href="{{ '/assets/css/giscus-custom.css' | relative_url }}">
+
 <div id="giscus-comment-thread"></div>
 
 <script>
@@ -12,9 +15,8 @@
   // Determine the Giscus theme based on the site's data-mode attribute
   function getGiscusTheme() {
     const mode = document.documentElement.getAttribute('data-mode') || 'dark';
-    // Use your site's dark theme for Giscus. You can customize this.
-    // Find more themes here: https://github.com/giscus/giscus/tree/main/styles/themes
-    return mode === 'light' ? 'light' : 'noborder_dark';
+    // Use transparent theme so our CSS takes full control
+    return mode === 'light' ? 'light' : 'transparent_dark';
   }
 
   // Load the Giscus script
@@ -25,9 +27,9 @@
   giscusScript.setAttribute('data-category', '{{ site.comments.giscus.category }}');
   giscusScript.setAttribute('data-category-id', '{{ site.comments.giscus.category_id }}');
   giscusScript.setAttribute('data-mapping', '{{ site.comments.giscus.mapping }}');
-  giscusScript.setAttribute('data-strict', '{{ site.comments.giscus.strict }}');
+  giscusScript.setAttribute('data-strict', '{{ site.comments.giscus.strict | default: "0" }}');
   giscusScript.setAttribute('data-reactions-enabled', '{{ site.comments.giscus.reactions_enabled }}');
-  giscusScript.setAttribute('data-emit-metadata', '{{ site.comments.giscus.emit_metadata }}');
+  giscusScript.setAttribute('data-emit-metadata', '{{ site.comments.giscus.emit_metadata | default: "0" }}');
   giscusScript.setAttribute('data-input-position', '{{ site.comments.giscus.input_position }}');
   giscusScript.setAttribute('data-lang', '{{ site.comments.giscus.lang }}');
   giscusScript.setAttribute('data-theme', getGiscusTheme()); // Set initial theme

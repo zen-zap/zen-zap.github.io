@@ -1,0 +1,102 @@
+/* Custom Giscus Comments Styling - Matches Site Theme */
+
+/* Main comment container */
+.giscus, .giscus-frame {
+  color-scheme: light dark;
+}
+
+/* Light mode - matches _light.scss */
+:root {
+  --giscus-bg: #ffffff;
+  --giscus-text: #2c3738;
+  --giscus-border: #e4efef;
+  --giscus-accent: #0f9f97;
+  --giscus-accent-alt: #0d8a83;
+  --giscus-hover-bg: rgba(15, 159, 151, 0.10);
+  --giscus-code-bg: #f3faf9;
+  --giscus-card-bg: #ffffff;
+  --giscus-card-shadow: 0 8px 18px -10px rgba(20,80,74,0.18), 0 0 0 1px rgba(16,120,112,0.08);
+}
+
+/* Dark mode - matches _dark.scss */
+[data-theme="dark"] {
+  --giscus-bg: #111a1c;
+  --giscus-text: #c3d2d4;
+  --giscus-border: #1d2629;
+  --giscus-accent: #15c2b8;
+  --giscus-accent-alt: #0fa79e;
+  --giscus-hover-bg: rgba(21, 194, 184, 0.14);
+  --giscus-code-bg: #0d1719;
+  --giscus-card-bg: #111a1c;
+  --giscus-card-shadow: 0 8px 22px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(26,55,59,0.4);
+}
+
+/* Comment section container */
+#post-comments {
+  border-top: none !important; /* Remove white line */
+  padding-top: 2rem;
+  margin-top: 3rem;
+}
+
+#giscus-comment-thread {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* Style the iframe - seamless integration */
+iframe.giscus-frame {
+  border: none !important; /* Remove border that creates white line */
+  border-radius: 0 !important;
+  background: transparent !important; /* Let theme handle background */
+  box-shadow: none !important;
+  transition: opacity 0.3s ease;
+}
+
+iframe.giscus-frame:hover {
+  opacity: 1;
+}
+
+/* Loading state */
+#giscus-comment-thread:empty::after {
+  content: "Loading comments...";
+  display: block;
+  text-align: center;
+  padding: 2rem;
+  color: var(--giscus-text);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #post-comments {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+  
+  #post-comments::before {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Additional polish for the comment area */
+.pt-5 {
+  position: relative;
+}
+
+/* Subtle animation on load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#giscus-comment-thread iframe {
+  animation: fadeInUp 0.5s ease-out;
+}

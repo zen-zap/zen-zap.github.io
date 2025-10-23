@@ -49,9 +49,11 @@ comments:
     repo_id: R_kgDOPJHl3g
     category: General
     category_id: DIC_kwDOPJHl3s4Cs3dm
-    mapping: pathname
+    mapping: pathname  # Uses page pathname for discussions
+    strict: 0  # Disable strict title matching for flexibility
     input_position: bottom
     reactions_enabled: 1
+    emit_metadata: 0
     lang: en
 assets:
   self_host:
@@ -66,6 +68,7 @@ pwa:
   cache:
     enabled: true
     deny_paths:
+      - "/cdn-cgi/"  # Exclude Cloudflare analytics endpoints
 pagination:
   enabled: true
   per_page: 10
