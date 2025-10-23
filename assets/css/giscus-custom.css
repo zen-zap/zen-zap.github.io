@@ -1,4 +1,4 @@
-/* Custom Giscus Comments Styling - Matches Site Theme */
+/* Custom Giscus Comments Styling - For Project Pages Only */
 
 /* Main comment container */
 .giscus, .giscus-frame {
@@ -31,9 +31,9 @@
   --giscus-card-shadow: 0 8px 22px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(26,55,59,0.4);
 }
 
-/* Comment section container */
+/* Comment section container - simple and clean for projects */
 #post-comments {
-  border-top: none !important; /* Remove white line */
+  border-top: none !important;
   padding-top: 2rem;
   margin-top: 3rem;
 }
@@ -45,9 +45,9 @@
 
 /* Style the iframe - seamless integration */
 iframe.giscus-frame {
-  border: none !important; /* Remove border that creates white line */
+  border: none !important;
   border-radius: 0 !important;
-  background: transparent !important; /* Let theme handle background */
+  background: transparent !important;
   box-shadow: none !important;
   transition: opacity 0.3s ease;
 }
@@ -65,24 +65,6 @@ iframe.giscus-frame:hover {
   color: var(--giscus-text);
   opacity: 0.6;
   font-style: italic;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  #post-comments {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-  }
-  
-  #post-comments::before {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-}
-
-/* Additional polish for the comment area */
-.pt-5 {
-  position: relative;
 }
 
 /* Subtle animation on load */

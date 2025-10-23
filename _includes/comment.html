@@ -1,5 +1,7 @@
-<!-- Custom Giscus Styling -->
+<!-- Custom Giscus Styling - Only for project pages -->
+{% if page.layout == 'project' %}
 <link rel="stylesheet" href="{{ '/assets/css/giscus-custom.css' | relative_url }}">
+{% endif %}
 
 <div id="giscus-comment-thread"></div>
 

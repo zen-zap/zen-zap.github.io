@@ -35,13 +35,16 @@ pwa:
 ### 4. ✅ Custom Giscus Styling
 **Created:** `assets/css/giscus-custom.css`
 
+**Important:** Custom styling is **only applied to project pages** to avoid layout conflicts with blog posts.
+
 **Features:**
-- Matches your site's turquoise accent color (#28a7a7)
+- Matches your site's turquoise accent color (#15c2b8 dark, #0f9f97 light)
 - Seamless light/dark mode transitions
-- Custom "💬 Comments & Discussion" header
-- Rounded borders with subtle shadows
+- Minimal borders and shadows for clean integration
 - Smooth animations on load
-- Fully responsive design
+- Only loads on project layout pages
+
+**For Blog Posts:** Uses default Giscus theme which handles responsive layout automatically.
 
 ### 5. ✅ Deployment Workflow Verification
 **Status:** Your workflow is correct!
